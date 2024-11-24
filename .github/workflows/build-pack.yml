@@ -1,0 +1,27 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    name: Build
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+          
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Setup user secrets
+        run: |
+          dotnet user-secrets set "syncfusion:license" "${{ secrets.SYNCFUSION }}" --project ./src/bundles/AdvancedForms.Studio/AdvancedForms.Studio.csproj
+    
+      - name: Build
+        run: dotnet build --no-incremental
