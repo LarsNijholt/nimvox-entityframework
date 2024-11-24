@@ -22,16 +22,16 @@ public class NimvoxDbContextOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     public NimvoxDbContextOptions? Options { get; }
 
+    /// <inheritdoc />
+    public DbContextOptionsExtensionInfo Info => new CustomDbContextOptionsExtensionInfo(this);
 
+    /// <inheritdoc />
     public void ApplyServices(IServiceCollection services)
     {
-        throw new NotImplementedException();
     }
 
+    /// <inheritdoc />
     public void Validate(IDbContextOptions options)
     {
-        throw new NotImplementedException();
     }
-
-    public DbContextOptionsExtensionInfo Info => new CustomDbContextOptionsExtensionInfo(this);
 }
