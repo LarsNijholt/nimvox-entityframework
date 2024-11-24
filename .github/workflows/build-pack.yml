@@ -1,4 +1,4 @@
-name: Build
+name: Build and Publish NuGet Package to GitHub Packages
 on:
   push:
     branches:
