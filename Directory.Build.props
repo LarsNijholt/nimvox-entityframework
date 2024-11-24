@@ -1,0 +1,27 @@
+<Project>
+
+    <PropertyGroup>
+        <TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+
+        <LangVersion>latest</LangVersion>
+        <Authors>Nimvox</Authors>
+        <Copyright>2024</Copyright>
+        <RepositoryType>git</RepositoryType>
+
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisModeDocumentation>Default</AnalysisModeDocumentation>
+        <AnalysisLevelDocumentation>latest</AnalysisLevelDocumentation>
+        <AnalysisLevel>latest</AnalysisLevel>
+
+        <!-- https://github.com/dotnet/sourcelink -->
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EnableTrimAnalyzer>false</EnableTrimAnalyzer>
+    </PropertyGroup>
+
+</Project>
