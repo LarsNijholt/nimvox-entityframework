@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{1D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{284D52E9-3FA6-46B4-9E6E-08E7FED2F7FA}"
 	ProjectSection(SolutionItems) = preProject
-		github\workflows\build-pack.yml = github\workflows\build-pack.yml
+		.github\workflows\build-pack.yml = .github\workflows\build-pack.yml
 	EndProjectSection
 EndProject
 Global
