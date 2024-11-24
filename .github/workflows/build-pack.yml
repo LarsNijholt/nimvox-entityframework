@@ -35,4 +35,4 @@ jobs:
 
       - name: Push NuGet Package
         if: github.event_name == 'release'
-        run: dotnet nuget push **/bin/Release/*.nupkg -k ${{ secrets.GITHUB_TOKEN }} -s ${{env.PackageRepository}}
+        run: dotnet nuget push **/bin/Release/*.nupkg -k ${{ secrets.PACKAGE_TOKEN }} -s ${{env.PackageRepository}}
