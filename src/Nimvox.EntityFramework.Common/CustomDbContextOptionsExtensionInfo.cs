@@ -3,7 +3,7 @@
 namespace Nimvox.EntityFramework.Common;
 
 /// <summary>
-/// Contains options for configuring Nimvox's Entity Framework Core integration.
+///     Contains options for configuring Nimvox's Entity Framework Core integration.
 /// </summary>
 public class CustomDbContextOptionsExtensionInfo : DbContextOptionsExtensionInfo
 {
@@ -11,7 +11,7 @@ public class CustomDbContextOptionsExtensionInfo : DbContextOptionsExtensionInfo
     public CustomDbContextOptionsExtensionInfo(IDbContextOptionsExtension extension) : base(extension)
     {
     }
-    
+
     /// <inheritdoc />
     public override bool IsDatabaseProvider => false;
 
@@ -24,7 +24,7 @@ public class CustomDbContextOptionsExtensionInfo : DbContextOptionsExtensionInfo
         // Return a unique hash code for your custom extension
         return 0;
     }
-    
+
     /// <inheritdoc />
     public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
     {

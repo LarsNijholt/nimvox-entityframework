@@ -4,21 +4,21 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Nimvox.EntityFramework.Common;
 
 /// <summary>
-/// Provides options for configuring Nimvox's Entity Framework Core integration.
+///     Provides options for configuring Nimvox's Entity Framework Core integration.
 /// </summary>
 public class NimvoxDbContextOptionsExtension : IDbContextOptionsExtension
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="NimvoxDbContextOptionsExtension"/> class.
+    ///     Initializes a new instance of the <see cref="NimvoxDbContextOptionsExtension" /> class.
     /// </summary>
     /// <param name="options">The options.</param>
     public NimvoxDbContextOptionsExtension(NimvoxDbContextOptions? options)
     {
         Options = options;
     }
-    
+
     /// <summary>
-    /// Gets the options.
+    ///     Gets the options.
     /// </summary>
     public NimvoxDbContextOptions? Options { get; }
 

@@ -5,14 +5,16 @@ using Nimvox.EntityFramework.Common.Models;
 namespace Nimvox.EntityFramework.Common.Extensions;
 
 /// <summary>
-/// Provides extensions to <see cref="IQueryable{T}"/>.
+///     Provides extensions to <see cref="IQueryable{T}" />.
 /// </summary>
 public static class QueryableExtensions
 {
     /// <summary>
-    /// Inserts or updates a list of entities in bulk.
+    ///     Inserts or updates a list of entities in bulk.
     /// </summary>
-    public static async Task BulkUpsertAsync<TDbContext, TEntity>(this TDbContext dbContext, IList<TEntity> entities, Expression<Func<TEntity, string>> keySelector, CancellationToken cancellationToken = default) where TDbContext : DbContext where TEntity : class, new()
+    public static async Task BulkUpsertAsync<TDbContext, TEntity>(this TDbContext dbContext, IList<TEntity> entities,
+        Expression<Func<TEntity, string>> keySelector, CancellationToken cancellationToken = default)
+        where TDbContext : DbContext where TEntity : class, new()
     {
         var set = dbContext.Set<TEntity>();
         var compiledKeySelector = keySelector.Compile();
@@ -23,7 +25,8 @@ public static class QueryableExtensions
             existingEntitiesQuery = existingEntitiesQuery.Where(containsLambda);
 
         var existingEntities = await existingEntitiesQuery.ToListAsync(cancellationToken);
-        var entitiesToUpdate = entities.IntersectBy(existingEntities.Select(compiledKeySelector), compiledKeySelector).ToList();
+        var entitiesToUpdate = entities.IntersectBy(existingEntities.Select(compiledKeySelector), compiledKeySelector)
+            .ToList();
         var entitiesToInsert = entities.Except(entitiesToUpdate).ToList();
 
         if (entitiesToUpdate.Any())
@@ -35,9 +38,10 @@ public static class QueryableExtensions
     }
 
     /// <summary>
-    /// Inserts a list of entities in bulk.
+    ///     Inserts a list of entities in bulk.
     /// </summary>
-    public static async Task BulkInsertAsync<TDbContext, TEntity>(this TDbContext dbContext, IList<TEntity> entities, CancellationToken cancellationToken = default) where TDbContext : DbContext where TEntity : class, new()
+    public static async Task BulkInsertAsync<TDbContext, TEntity>(this TDbContext dbContext, IList<TEntity> entities,
+        CancellationToken cancellationToken = default) where TDbContext : DbContext where TEntity : class, new()
     {
         var set = dbContext.Set<TEntity>();
 
@@ -46,11 +50,12 @@ public static class QueryableExtensions
 
         await dbContext.SaveChangesAsync(cancellationToken);
     }
-    
+
     /// <summary>
-    /// Returns a paged result from the specified query.
+    ///     Returns a paged result from the specified query.
     /// </summary>
-    public static async Task<Page<TTarget>> PaginateAsync<T, TTarget>(this IQueryable<T> queryable, Expression<Func<T, TTarget>> projection, PageArgs? pageArgs = default)
+    public static async Task<Page<TTarget>> PaginateAsync<T, TTarget>(this IQueryable<T> queryable,
+        Expression<Func<T, TTarget>> projection, PageArgs? pageArgs = default)
     {
         var count = await queryable.CountAsync();
         if (pageArgs?.Offset != null) queryable = queryable.Skip(pageArgs.Offset.Value);
@@ -60,7 +65,7 @@ public static class QueryableExtensions
     }
 
     /// <summary>
-    /// Returns a paged result from the specified query.
+    ///     Returns a paged result from the specified query.
     /// </summary>
     public static async Task<Page<T>> PaginateAsync<T>(this IQueryable<T> queryable, PageArgs? pageArgs = default)
     {

@@ -9,7 +9,7 @@ using Nimvox.EntityFramework.Common.Contracts;
 namespace Nimvox.EntityFramework.Common;
 
 /// <summary>
-/// Class That enable Schema change for Migration
+///     Class That enable Schema change for Migration
 /// </summary>
 public class DbSchemaAwareMigrationAssembly : MigrationsAssembly
 {

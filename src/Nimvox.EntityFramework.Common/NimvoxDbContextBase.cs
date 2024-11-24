@@ -11,31 +11,12 @@ public abstract class NimvoxDbContextBase : DbContext, INimvoxDbContextSchema
         EntityState.Added,
         EntityState.Modified
     };
-    
-    /// <summary>
-    /// The <see cref="IServiceProvider"/>.
-    /// </summary>
-    protected readonly IServiceProvider ServiceProvider;
-
-    /// <inheritdoc />
-    public string Schema { get; }
-    
-    /// <summary>
-    /// The default schema used by Nimvox.
-    /// </summary>
-    public static string NimvoxSchema { get; set; } = "Nimvox";
-    
-    /// <summary>
-    /// The table used to store the migrations history.
-    /// </summary>
-    public static string MigrationsHistoryTable { get; } = "__EFMigrationsHistory";
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="NimvoxDbContextBase"/> class.
+    ///     Initializes a new instance of the <see cref="NimvoxDbContextBase" /> class.
     /// </summary>
-    protected NimvoxDbContextBase(DbContextOptions options, IServiceProvider serviceProvider) : base(options)
+    protected NimvoxDbContextBase(DbContextOptions options) : base(options)
     {
-        ServiceProvider = serviceProvider;
         var nimvoxDbContextOptions = options.FindExtension<NimvoxDbContextOptionsExtension>()?.Options;
 
         Schema = !string.IsNullOrWhiteSpace(nimvoxDbContextOptions?.SchemaName)
@@ -43,14 +24,25 @@ public abstract class NimvoxDbContextBase : DbContext, INimvoxDbContextSchema
             : NimvoxSchema;
     }
 
+    /// <summary>
+    ///     The default schema used by Nimvox.
+    /// </summary>
+    public static string NimvoxSchema { get; set; } = "Nimvox";
+
+    /// <summary>
+    ///     The table used to store the migrations history.
+    /// </summary>
+    public static string MigrationsHistoryTable { get; } = "__EFMigrationsHistory";
+
+    /// <inheritdoc />
+    public string Schema { get; }
+
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         if (!string.IsNullOrWhiteSpace(Schema))
-        {
             if (!Database.IsSqlite())
                 modelBuilder.HasDefaultSchema(Schema);
-        }
 
         ApplyEntityConfigurations(modelBuilder);
 
@@ -58,21 +50,21 @@ public abstract class NimvoxDbContextBase : DbContext, INimvoxDbContextSchema
     }
 
     /// <summary>
-    /// Override this method to apply entity configurations.
+    ///     Override this method to apply entity configurations.
     /// </summary>
     protected virtual void ApplyEntityConfigurations(ModelBuilder modelBuilder)
     {
     }
-    
+
     /// <summary>
-    /// Override this method to apply entity configurations.
+    ///     Override this method to apply entity configurations.
     /// </summary>
     protected virtual void Configure(ModelBuilder modelBuilder)
     {
     }
-    
+
     /// <summary>
-    /// Override this method to apply entity configurations for the SQLite provider.
+    ///     Override this method to apply entity configurations for the SQLite provider.
     /// </summary>
     protected virtual void SetupForSqlite(ModelBuilder modelBuilder)
     {
@@ -80,15 +72,14 @@ public abstract class NimvoxDbContextBase : DbContext, INimvoxDbContextSchema
         // here: https://docs.microsoft.com/en-us/ef/core/providers/sqlite/limitations#query-limitations
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
-            var properties = entityType.ClrType.GetProperties().Where(p => p.PropertyType == typeof(DateTimeOffset) || p.PropertyType == typeof(DateTimeOffset?));
+            var properties = entityType.ClrType.GetProperties().Where(p =>
+                p.PropertyType == typeof(DateTimeOffset) || p.PropertyType == typeof(DateTimeOffset?));
 
             foreach (var property in properties)
-            {
                 modelBuilder
                     .Entity(entityType.Name)
                     .Property(property.Name)
                     .HasConversion(new DateTimeOffsetToStringConverter());
-            }
         }
     }
 }

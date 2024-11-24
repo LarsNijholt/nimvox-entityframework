@@ -5,14 +5,14 @@ using Microsoft.Extensions.Hosting;
 namespace Nimvox.EntityFramework.Common;
 
 /// <summary>
-/// Executes EF Core migrations using the specified <see cref="DbContext"/> type.
+///     Executes EF Core migrations using the specified <see cref="DbContext" /> type.
 /// </summary>
-public class RunMigrationsHostedService<TDbContext>: IHostedService where TDbContext : DbContext
+public class RunMigrationsHostedService<TDbContext> : IHostedService where TDbContext : DbContext
 {
     private readonly IServiceScopeFactory _scopeFactory;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RunMigrationsHostedService{TDbContext}"/> class.
+    ///     Initializes a new instance of the <see cref="RunMigrationsHostedService{TDbContext}" /> class.
     /// </summary>
     public RunMigrationsHostedService(IServiceScopeFactory scopeFactory)
     {
@@ -30,5 +30,8 @@ public class RunMigrationsHostedService<TDbContext>: IHostedService where TDbCon
     }
 
     /// <inheritdoc />
-    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
 }

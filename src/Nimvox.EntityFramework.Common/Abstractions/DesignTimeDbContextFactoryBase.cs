@@ -7,15 +7,16 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Nimvox.EntityFramework.Common.Abstractions;
 
 /// <summary>
-/// A design-time factory base class that can be inherited from by provider-specific implementations.
+///     A design-time factory base class that can be inherited from by provider-specific implementations.
 /// </summary>
-public abstract class DesignTimeDbContextFactoryBase<TDbContext> : IDesignTimeDbContextFactory<TDbContext> where TDbContext : DbContext
+public abstract class DesignTimeDbContextFactoryBase<TDbContext> : IDesignTimeDbContextFactory<TDbContext>
+    where TDbContext : DbContext
 {
     /// <inheritdoc />
     public TDbContext CreateDbContext(string[] args)
     {
         var builder = new DbContextOptionsBuilder<TDbContext>();
-        var connectionStringOptions = new Option<string>("");
+        var connectionStringOptions = new Option<string>("--connectionString", "Specifies the connection string.");
         var command = new RootCommand();
 
         command.AddOption(connectionStringOptions);
@@ -27,11 +28,11 @@ public abstract class DesignTimeDbContextFactoryBase<TDbContext> : IDesignTimeDb
 
         ConfigureBuilder(builder, connectionString);
 
-        return (TDbContext)Activator.CreateInstance(typeof(TDbContext), builder.Options, serviceProvider)!;
+        return (TDbContext)Activator.CreateInstance(typeof(TDbContext), builder.Options)!;
     }
-    
+
     /// <summary>
-    /// Implement this to configure the <see cref="DbContextOptionsBuilder{TContext}"/>.
+    ///     Implement this to configure the <see cref="DbContextOptionsBuilder{TContext}" />.
     /// </summary>
     protected abstract void ConfigureBuilder(DbContextOptionsBuilder<TDbContext> builder, string connectionString);
 }

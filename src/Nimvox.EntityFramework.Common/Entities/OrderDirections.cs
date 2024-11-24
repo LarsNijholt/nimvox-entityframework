@@ -1,17 +1,16 @@
 ﻿namespace Nimvox.EntityFramework.Common.Entities;
 
 /// <summary>
-/// The order direction.
+///     The order direction.
 /// </summary>
 public enum OrderDirection
 {
     /// <summary>
-    /// Ascending order.
+    ///     Ascending order.
     /// </summary>
     Ascending,
-    
+
     /// <summary>
-    /// 
     /// </summary>
     Descending
 }
