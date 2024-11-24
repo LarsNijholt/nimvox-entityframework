@@ -21,7 +21,7 @@ public abstract class NimvoxDbContextBase : DbContext, INimvoxDbContextSchema
     public string Schema { get; }
     
     /// <summary>
-    /// The default schema used by Elsa.
+    /// The default schema used by Nimvox.
     /// </summary>
     public static string NimvoxSchema { get; set; } = "Nimvox";
     
