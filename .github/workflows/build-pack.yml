@@ -5,6 +5,11 @@ on:
       - master
   pull_request:
     types: [opened, synchronize, reopened]
+    
+env:
+  NuGetDirectory: ${{ github.workspace}}/nuget
+  PackageRepository: https://nuget.pkg.github.com/LarsNijholt/index.json
+  
 jobs:
   build:
     name: Build
@@ -21,3 +26,11 @@ jobs:
 
       - name: Build
         run: dotnet build --no-incremental
+
+      - name: Pack NuGet Package
+        if: github.event_name == 'release'
+        run: dotnet pack --configuration Release -p:PackageVersion=${{ github.event.release.tag_name }}
+
+      - name: Push NuGet Package
+        if: github.event_name == 'release'
+        run: dotnet nuget push ${{env.NuGetDirectory}}/nimvox-entityframework/*.nupkg -k ${{ secrets.GITHUB_TOKEN }} -s ${{env.PackageRepository}}
