@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{97961946-56AA-4C45-9CAA-11258CD0A541}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{1DAD1F49-DE4B-4810-8EC4-5359BFD22C05}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{284D52E9-3FA6-46B4-9E6E-08E7FED2F7FA}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-pack.yml = .github\workflows\build-pack.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.EntityFramework.Common", "src\ZyphCare.EntityFramework.Common\ZyphCare.EntityFramework.Common.csproj", "{03B2D496-BCBE-476C-99C2-4F1F52CF3A29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{03B2D496-BCBE-476C-99C2-4F1F52CF3A29} = {97961946-56AA-4C45-9CAA-11258CD0A541}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03B2D496-BCBE-476C-99C2-4F1F52CF3A29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03B2D496-BCBE-476C-99C2-4F1F52CF3A29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03B2D496-BCBE-476C-99C2-4F1F52CF3A29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03B2D496-BCBE-476C-99C2-4F1F52CF3A29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
